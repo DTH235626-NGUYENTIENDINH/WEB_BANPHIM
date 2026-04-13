@@ -1,4 +1,6 @@
-/* --- CARD SẢN PHẨM --- */
+/* ============================================================
+   1. CARD SẢN PHẨM (GIỮ NGUYÊN VÀ TỐI ƯU NHẸ)
+   ============================================================ */
 .big-product-card {
     border: 1px solid #e0e0e0;
     border-radius: 20px;
@@ -12,7 +14,7 @@
 
 .big-product-card:hover {
     border-color: #000;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
     transform: translateY(-5px);
 }
 
@@ -34,15 +36,9 @@
     transform: scale(1.05);
 }
 
-.product-info-holder {
-    padding: 25px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* --- THANH TÌM KIẾM & FILTER --- */
+/* ============================================================
+   2. SEARCH BOX
+   ============================================================ */
 .search-box {
     width: 0;
     overflow: hidden;
@@ -52,7 +48,7 @@
 }
 
 .search-box.active {
-    width: 250px; /* To ra như ý ông */
+    width: 250px;
     margin-right: 10px;
 }
 
@@ -63,7 +59,7 @@
     font-size: 14px;
     background-color: #f5f5f7 !important;
     outline: none !important;
-    box-shadow: none !important; /* Bỏ bóng xanh */
+    box-shadow: none !important;
     transition: all 0.3s ease;
     width: 100%;
 }
@@ -71,20 +67,136 @@
 .search-box input:focus {
     border-color: #000 !important;
     background-color: #fff !important;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Custom Sort Button */
+/* ============================================================
+   3. CHIP FILTER (HIỆU ỨNG HOVER ĐỔI MÀU)
+   ============================================================ */
+/* 1. Thiết lập chung (Bóp nhỏ kích thước lại như ông muốn) */
+.btn.rounded-pill {
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #e0e0e0 !important;
+    font-weight: 500;
+    padding: 4px 16px !important;
+    font-size: 13px !important;
+    letter-spacing: 0.3px;
+}
+/* 2. Khi rê chuột vào White Chip (Chưa chọn) */
+div a.btn.rounded-pill:hover {
+    background-color: #000 !important;
+    color: #fff !important;
+    transform: translateY(-5px) scale(1.05) !important;
+    display: inline-block !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+/* 3. Khi rê chuột vào Dark Chip (Đã chọn) */
+.btn-dark.rounded-pill:hover {
+    background-color: #333 !important;
+    border-color: #333 !important;
+    /* Giữ hiệu ứng đồng nhất */
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 4. Hiệu ứng khi bấm xuống */
+.btn.rounded-pill:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* ============================================================
+   4. SORT MENU
+   ============================================================ */
 .custom-sort-btn::after {
     display: none !important;
 }
 
-.btn-link i {
-    font-size: 18px;
-    color: #333;
-    transition: color 0.3s;
+.sort-menu {
+    min-width: 200px;
+    padding: 10px 0;
+    /* Hiệu ứng ẩn để trượt lên */
+    display: block !important;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.3s ease;
 }
 
-.btn-link:hover i {
-    color: #000;
+.sort-menu.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
 }
+
+.sort-menu .dropdown-item {
+    padding: 8px 20px;
+    font-size: 14px;
+    color: #444;
+    transition: all 0.2s ease;
+}
+
+.sort-menu .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #000;
+    padding-left: 25px;
+    /* Nhích sang phải nhẹ */
+}
+
+/* Mục đang chọn trong dropdown (Featured) */
+.active-sort {
+    background-color: #f3f3f3 !important;
+    color: #000 !important;
+    font-weight: 600;
+    margin: 0 8px;
+    border-radius: 8px;
+}
+
+.sort-menu .active-sort {
+    background-color: #f3f3f3 !important;
+    color: #000 !important;
+    font-weight: 600;
+    margin: 4px 8px !important; 
+    border-radius: 8px !important;
+    width: auto !important;
+    display: block;
+}
+
+/* Trạng thái mặc định của icon */
+.custom-sort-btn i {
+    transition: transform 0.3s ease; /* Thời gian xoay 0.3 giây */
+    display: inline-block; /* Bắt buộc để xoay được */
+}
+
+/* Khi nút Dropdown đang mở (Bootstrap sẽ thêm class .show vào nút) */
+.custom-sort-btn.show i {
+    transform: rotate(180deg); /* Xoay ngược 180 độ */
+}
+
+/* --- FIX LỖI VĂNG QUA PHẢI KHI ĐÓNG --- */
+
+.dropdown-menu.sort-menu {
+    left: auto !important;
+    right: 0 !important;
+    
+    /* Hiệu ứng ẩn */
+    display: block !important; 
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px) scaleY(0);
+    transform-origin: top;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    pointer-events: none;
+}
+
+/* Khi mở menu */
+.dropdown-menu.sort-menu.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(10px) scaleY(1);
+    pointer-events: auto;
+}
+

@@ -12,3 +12,11 @@ function toggleSearch() {
         console.error("Lỗi: Không tìm thấy ID searchBox trong HTML");
     }
 }
+
+function selectSort(element) {
+    const items = document.querySelectorAll('.sort-item');
+    items.forEach(item => {
+        item.classList.remove('active-sort');
+    });
+    element.classList.add('active-sort');
+}

@@ -49,14 +49,19 @@
                         SORT <i class="fa-solid fa-chevron-down ms-1" style="font-size: 10px;"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-4 mt-2 py-2 sort-menu">
-                        <li><a class="dropdown-item active-sort" href="#">Featured</a></li>
+                        <li><a class="dropdown-item sort-item active-sort" href="#"
+                                onclick="selectSort(this)">Featured</a></li>
                         <li>
                             <hr class="dropdown-divider mx-2">
                         </li>
-                        <li><a class="dropdown-item" href="#">Alphabetical, A-Z</a></li>
-                        <li><a class="dropdown-item" href="#">Alphabetical, Z-A</a></li>
-                        <li><a class="dropdown-item" href="#">Price, Low to High</a></li>
-                        <li><a class="dropdown-item" href="#">Price, High to Low</a></li>
+                        <li><a class="dropdown-item sort-item" href="#" onclick="selectSort(this)">Alphabetical, A-Z</a>
+                        </li>
+                        <li><a class="dropdown-item sort-item" href="#" onclick="selectSort(this)">Alphabetical, Z-A</a>
+                        </li>
+                        <li><a class="dropdown-item sort-item" href="#" onclick="selectSort(this)">Price, Low to
+                                High</a></li>
+                        <li><a class="dropdown-item sort-item" href="#" onclick="selectSort(this)">Price, High to
+                                Low</a></li>
                     </ul>
                 </div>
             </div>
