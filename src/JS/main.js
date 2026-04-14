@@ -1,6 +1,7 @@
 // main.js - Viết kiểu thuần túy nhất để trình duyệt nào cũng đọc được
+
 function toggleSearch() {
-    console.log("Đã bấm kính lúp!"); 
+    console.log("Đã bấm kính lúp!");
     var box = document.getElementById('searchBox');
     if (box) {
         box.classList.toggle('active');
@@ -20,3 +21,4 @@ function selectSort(element) {
     });
     element.classList.add('active-sort');
 }
+

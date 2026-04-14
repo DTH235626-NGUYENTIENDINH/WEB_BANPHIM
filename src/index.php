@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    include 'DB/db_connect.php'; //Ket nối
     include 'header.php'; // Gọi đầu trang
 ?>
 
