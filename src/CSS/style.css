@@ -1,10 +1,8 @@
 @import url("../../node_modules/bootstrap/dist/css/bootstrap.min.css");
 
-/* Sau đó dán CSS tùy chỉnh của bạn xuống dưới */
-
-/* Áp dụng cho toàn bộ trang web */
+/* 1. ÁP DỤNG CHUNG _________________________________________________________________________________________________________________*/
 html, body {
-    background-color: #f2f4f7 !important; /* Màu xám ông muốn */
+    background-color: #f2f4f7 !important; /* Màu xám nền chủ đạo */
 }
 
 /* Ép tất cả các thẻ main và section về trong suốt để hiện nền body */
@@ -43,12 +41,12 @@ main, section, .container, .container-fluid {
 /* Badge số 0 hình tròn trắng giống mẫu */
 .cart-badge {
     position: absolute;
-    top: -8px;      /* Điều chỉnh lên xuống */
-    right: -10px;   /* Điều chỉnh trái phải */
-    background-color: #fff; /* Nền trắng */
-    color: #000;            /* Chữ đen */
-    border: 1px solid #000; /* Viền đen mỏng */
-    border-radius: 50%;     /* Bo tròn tuyệt đối */
+    top: -8px;
+    right: -10px;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 50%;
     width: 18px;
     height: 18px;
     display: flex;
@@ -60,17 +58,15 @@ main, section, .container, .container-fluid {
 
 .navbar .container {
     display: flex !important;
-    flex-wrap: nowrap !important; /* Không cho phép xuống dòng */
+    flex-wrap: nowrap !important;
     justify-content: space-between;
     align-items: center;
 }
 
-/* Cố định kích thước logo không để nó đẩy icon đi xa */
 .navbar-brand {
     white-space: nowrap;
 }
 
-/* Khi menu sổ ra trên mobile, nó phải nằm tuyệt đối ở dưới */
 @media (max-width: 991px) {
     .navbar-collapse {
         position: absolute;
@@ -84,10 +80,9 @@ main, section, .container, .container-fluid {
     }
 }
 
-/* CAROUSEL _____________________________________________________________________________________________________________________________________________________________________*/
-/* Hiệu ứng bàn phím bay nhẹ nhàng */
+/* 2. CAROUSEL _________________________________________________________________________________________________________________*/
 .floating-img {
-    filter: drop-shadow(0 20px 30px rgba(255, 255, 255, 0.1)); /* Đổ bóng sáng nhẹ */
+    filter: drop-shadow(0 20px 30px rgba(255, 255, 255, 0.1));
     animation: float 4s ease-in-out infinite;
 }
 
@@ -97,7 +92,6 @@ main, section, .container, .container-fluid {
     100% { transform: translateY(0px); }
 }
 
-/* Tùy chỉnh nút Learn More */
 .btn-outline-light {
     border-width: 2px;
     text-transform: uppercase;
@@ -109,163 +103,141 @@ main, section, .container, .container-fluid {
     color: #000;
 }
 
-/*Đẩy nút Prev/Next ra sát mép */
 .carousel-control-prev {
-    justify-content: flex-start; /* Đẩy icon về phía trái */
-    width: 5%; /* Thu hẹp vùng click để không bị đè lên nút mua */
-    left: 10px; /* Dịch ra sát mép màn hình */
+    justify-content: flex-start;
+    width: 5%;
+    left: 10px;
 }
 
 .carousel-control-next {
-    justify-content: flex-end; /* Đẩy icon về phía phải */
+    justify-content: flex-end;
     width: 5%;
     right: 10px;
 }
 
-/* Tăng kích thước Icon điều hướng cho dễ bấm (nếu cần) */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     width: 3rem;
     height: 3rem;
 }
-/*_____________________________________________________________________________________________________________________________________________________________*/
-/* Khuôn mẫu thẻ sản phẩm */
-.product-item {
-    transition: all 0.3s ease;
-    border-radius: 20px !important; /* Bo góc lớn giống hình mẫu */
-    overflow: hidden;
+
+/* 3. PRODUCT & CARD _________________________________________________________________________________________________________________*/
+
+/* Card tổng quát: Làm trắng, bo góc, tăng padding và tạo hiệu ứng hover */
+.product-card, .blog-card, .card {
+    background-color: #ffffff !important;
+    border-radius: 15px !important;
+    padding: 35px 25px !important; /* Tăng padding trên dưới để sang trọng hơn */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left; /* Luôn canh trái */
+    border: none !important;
 }
 
-.product-item:hover {
+.product-card:hover, .blog-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* Khung chứa ảnh có nền xám */
-.img-wrapper {
-    background-color: #f2f4f7;
-    padding: 2rem;
+/* Vùng chứa ảnh: Nền xám nhẹ, bo góc, canh trái ảnh */
+.product-img-wrapper {
+    background-color: #f8f9fa !important;
+    border-radius: 12px;
+    padding: 1.5rem 20px; 
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Canh trái ảnh */
+    margin-bottom: 1.5rem;
+}
+
+/* Nội dung văn bản */
+.product-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Cho phép phần này giãn ra để đẩy nút xuống dưới */
+}
+
+/* Tiêu đề: Khóa 2 dòng, hỗ trợ Standard line-clamp */
+.product-content h5 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    min-height: 2.8em; /* Đảm bảo bằng chiều cao của 2 dòng */
+    margin-bottom: 10px;
+    
+    /* Cấu trúc khóa dòng đa trình duyệt */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2; /* Standard property */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Phần đẩy nút xuống đáy (Màu gạch mờ tùy chọn) */
+.product-content .mt-auto-custom {
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+/* NÚT LEARN MORE CHUẨN WOOTING */
+.btn-learn-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none !important;
+    font-weight: 600;
+    color: #000 !important;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.icon-box {
+    width: 34px;
+    height: 34px;
+    background-color: #212529;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 4 / 3; /* Giữ khung ảnh luôn đồng nhất */
+    border-radius: 8px;
+    margin-right: 12px;
+    transition: all 0.3s ease;
 }
 
-.img-wrapper img {
-    max-height: 100%;
-    object-fit: contain;
-    transition: transform 0.4s ease;
+.icon-box i {
+    font-size: 13px;
 }
 
-.product-item:hover img {
-    transform: scale(1.08);
+/* Hiệu ứng Hover nút */
+.btn-learn-more:hover .icon-box {
+    transform: translateX(5px);
+    background-color: #000;
 }
 
-/* Nhãn New màu vàng */
-.badge-new {
-    background-color: #ffc107;
-    color: #000;
-    font-weight: 600;
-    padding: 5px 15px;
-    border-radius: 50px;
-    font-size: 12px;
+.btn-learn-more:hover {
+    opacity: 0.7;
 }
-
-/* TÙY CHỈNH RIÊNG CHO FOOTER _________________________________________________________________________________________________________*/
-footer .nav-link {
-    transition: 0.2s ease-in-out;
-}
-
-/* Hiệu ứng gạch chân khi hover vào link trong footer */
-footer .nav-link:hover {
-    color: #fff !important;
-    text-decoration: underline;
-}
-
-/* Hiệu ứng mờ icon mạng xã hội */
-footer .fa-brands:hover {
-    color: #adb5bd;
-}
-
-/* Chỉnh ô input email cho vuông vức và sang */
-footer .form-control {
-    border-right: none;
-}
-
-footer .form-control:focus {
-    border-color: #f8f9fa;
-    box-shadow: none;
-}
-
-/* Chỉnh màu placeholder cho dễ nhìn trên nền đen */
-footer .form-control::placeholder {
-    color: #6c757d;
-}
-/* Làm sáng chữ trong danh mục Shop và Support */
-footer .nav-link.text-secondary {
-    color: #adb5bd !important; /* Màu xám sáng (light gray) để dễ đọc hơn trên nền đen */
-    transition: 0.2s ease-in-out;
-}
-
-/* Hiệu ứng khi hover: Chữ sáng rực lên và gạch chân */
-footer .nav-link.text-secondary:hover {
-    color: #ffffff !important; /* Trắng tinh khi di chuột vào */
-    text-decoration: underline;
-}
-
-/* Tiêu đề các cột (Shop, Support, Stay in the loop) */
-footer h6.text-uppercase {
-    color: #ffffff;
-    letter-spacing: 1px;
-}
-
-/* --- Các phần cũ giữ nguyên --- */
-
-footer .fa-brands:hover {
-    color: #adb5bd;
-}
-
-footer .form-control {
-    border-right: none;
-    color: white !important; /* Đảm bảo chữ nhập vào ô email cũng màu trắng */
-}
-
-footer .form-control:focus {
-    border-color: #f8f9fa;
-    box-shadow: none;
-    background-color: transparent !important;
-}
-
-footer .form-control::placeholder {
-    color: #6c757d;
-}
-
-/* Ép khung ảnh blog về tỉ lệ 16:9____________________________________________________________________________________________________________________________________________ */
+/* 4. BLOG SECTION _________________________________________________________________________________________________________________*/
 .blog-img-wrapper {
     width: 100%;
-    aspect-ratio: 16 / 9; /* Tỉ lệ vàng cho ảnh tin tức */
+    aspect-ratio: 16 / 9;
     background-color: #f8f9fa;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border-radius: 12px;
 }
 
 .blog-img-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Quan trọng: Ảnh sẽ tự cắt để lấp đầy khung mà không bị méo */
+    object-fit: cover;
     transition: transform 0.5s ease;
 }
 
-/* Đảm bảo chiều cao các Card bằng nhau */
-.blog-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-/* Ép phần mô tả có độ cao tối thiểu để nút "Go to source" luôn thẳng hàng */
 .blog-info {
     display: flex;
     flex-direction: column;
@@ -275,7 +247,7 @@ footer .form-control::placeholder {
 .blog-info p {
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    line-clamp: 2; /* Thêm dòng này để đúng chuẩn hiện đại */
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin-bottom: 1.5rem;
@@ -290,21 +262,46 @@ footer .form-control::placeholder {
     min-height: 3em; 
 }
 
-/* Làm trắng các ô sản phẩm và blog trên nền xám */
-.product-card, .blog-card, .card {
-    background-color: #ffffff !important;
-    border-radius: 15px !important;
-    padding: 15px;
-    transition: transform 0.3s ease;
+/* 5. FOOTER _________________________________________________________________________________________________________________*/
+footer .nav-link {
+    transition: 0.2s ease-in-out;
 }
 
-.product-card:hover, .blog-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+footer .nav-link:hover {
+    color: #fff !important;
+    text-decoration: underline;
 }
 
-/* Vùng chứa ảnh thì cho xám nhẹ lại để tôn sản phẩm */
-.product-img-wrapper, .bg-light {
-    background-color: #f8f9fa !important;
-    border-radius: 12px;
+footer .fa-brands:hover {
+    color: #adb5bd;
+}
+
+footer .form-control {
+    border-right: none;
+    color: white !important;
+}
+
+footer .form-control:focus {
+    border-color: #f8f9fa;
+    box-shadow: none;
+    background-color: transparent !important;
+}
+
+footer .form-control::placeholder {
+    color: #6c757d;
+}
+
+footer .nav-link.text-secondary {
+    color: #adb5bd !important;
+    transition: 0.2s ease-in-out;
+}
+
+footer .nav-link.text-secondary:hover {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+footer h6.text-uppercase {
+    color: #ffffff;
+    letter-spacing: 1px;
 }

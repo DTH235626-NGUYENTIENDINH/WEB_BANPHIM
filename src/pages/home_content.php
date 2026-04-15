@@ -62,36 +62,39 @@
 </div>
 
 <!-- GRID PRODUCT-->
-<section class="py-5 bg-white">
+<section class="py-5" style="background-color: #f8f9fa;">
     <div class="container">
         <div class="d-flex justify-content-between align-items-end mb-5">
             <div>
                 <h6 class="text-uppercase fw-bold text-secondary mb-1">Featured Collections</h6>
-                <h2 class="fw-bold m-0" style="letter-spacing: -1.5px;">BEST SELLERS</h2>
+                <h2 class="fw-bold m-0" style="letter-spacing: -1.5px;">OUR PRODUCT</h2>
             </div>
-            <a href="index.php?page=products" class="text-dark fw-bold text-decoration-none border-bottom border-2 border-dark pb-1">VIEW
-                ALL</a>
+            <a href="index.php?page=products"
+                class="text-dark fw-bold text-decoration-none border-bottom border-2 border-dark pb-1">
+                VIEW ALL <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
         </div>
 
         <div class="row g-4">
             <div class="col-6 col-md-4 col-lg-4">
-                <div class="product-card border-0">
-                    <div class="product-img-wrapper mb-3 position-relative">
-                        <span
-                            class="badge bg-warning text-dark position-absolute top-0 start-0 m-3 rounded-pill px-3 py-2 fw-bold small">New!</span>
-                        <img src="../public/carousel/pic1.webp" class="img-fluid" alt="Product">
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <img src="../public/carousel/pic2.webp" class="img-fluid" style="max-height: 160px;">
                     </div>
-                    <div class="product-content text-center">
-                        <p class="text-secondary small mb-1 text-uppercase fw-medium">Wooting</p>
-                        <h5 class="fw-bold mb-1">Wooting 60HE v2</h5>
-                        <p class="text-muted small mb-3">60% Gaming Keyboard</p>
-                        <div class="d-flex justify-content-center align-items-center gap-3">
-                            <span class="fw-bold fs-5">4.412.000 ₫</span>
-                            <button
-                                class="btn btn-dark rounded-circle p-0 d-flex align-items-center justify-content-center"
-                                style="width: 35px; height: 35px;">
-                                <i class="fa-solid fa-plus small"></i>
-                            </button>
+
+                    <div class="product-content">
+                        <p class="text-secondary small mb-1 text-uppercase fw-medium">Brand Name</p>
+                        <h5 class="fw-bold">Product Name Here (Even if it's very long)</h5>
+                        <p class="text-muted small mb-3">Short description about the product.</p>
+
+                        <div class="mt-auto-custom">
+                            <span class="fw-bold fs-5 d-block mb-3">1.000.000 ₫</span>
+                            <a href="#" class="btn-learn-more">
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                                <span>Learn more</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -101,25 +104,39 @@
 </section>
 
 <!-- GRID OTHER PRODUCT-->
-<section class="py-5" style="background-color: #f8f9fa;">
+<section class="py-5">
     <div class="container">
-        <div class="mb-5 text-center">
-            <h2 class="fw-bold" style="letter-spacing: -1px;">READY TO ORDER</h2>
-            <p class="text-secondary text-uppercase small">Customized components for your perfect build</p>
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <h6 class="text-uppercase fw-bold text-secondary mb-1">Customized components</h6>
+                <h2 class="fw-bold m-0" style="letter-spacing: -1.5px;">OTHER PRODUCT</h2>
+            </div>
+            <a href="index.php?page=products"
+                class="text-dark fw-bold text-decoration-none border-bottom border-2 border-dark pb-1">
+                VIEW ALL <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
         </div>
 
-        <div class="row g-4 justify-content-center">
+        <div class="row g-4">
             <div class="col-6 col-md-4 col-lg-4">
-                <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden text-center">
-                    <div class="bg-light p-5">
-                        <img src="../public/carousel/pic2.webp" class="img-fluid" style="max-height: 180px;">
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <img src="../public/carousel/pic2.webp" class="img-fluid" style="max-height: 160px;">
                     </div>
-                    <div class="card-body p-4">
-                        <h6 class="fw-bold mb-2">Magnetic Switch Pack</h6>
-                        <p class="text-muted small mb-3">Lekker L60 - 10pcs</p>
-                        <div class="d-flex justify-content-center align-items-center gap-3">
-                            <span class="fw-bold text-dark">450.000 ₫</span>
-                            <a href="#" class="btn btn-dark btn-sm rounded-pill px-4">Order Now</a>
+
+                    <div class="product-content">
+                        <p class="text-secondary small mb-1 text-uppercase fw-medium">Brand Name</p>
+                        <h5 class="fw-bold">Product Name Here (Even if it's very long)</h5>
+                        <p class="text-muted small mb-3">Short description about the product.</p>
+
+                        <div class="mt-auto-custom">
+                            <span class="fw-bold fs-5 d-block mb-3">1.000.000 ₫</span>
+                            <a href="#" class="btn-learn-more">
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                                <span>Learn more</span>
+                            </a>
                         </div>
                     </div>
                 </div>
