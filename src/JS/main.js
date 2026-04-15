@@ -22,3 +22,83 @@ function selectSort(element) {
     element.classList.add('active-sort');
 }
 
+
+/**
+ * XỬ LÝ TRANG CHI TIẾT SẢN PHẨM
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Khai báo các phần tử
+    const variantSelect = document.getElementById('variant-select');
+    const priceDisplay = document.querySelector('.text-danger.fw-bold');
+    const addToCartBtn = document.querySelector('button[type="submit"]');
+
+    // 2. Xử lý nhảy giá khi chọn Switch/Version
+    if (variantSelect && priceDisplay) {
+        variantSelect.addEventListener('change', function() {
+            // Lấy option đang được chọn
+            const selectedOption = this.options[this.selectedIndex];
+            
+            // Lấy giá từ thuộc tính data-price mà mình đã đặt ở PHP
+            const newPrice = selectedOption.getAttribute('data-price');
+            
+            if (newPrice) {
+                // Hiệu ứng mờ dần rồi hiện để tạo cảm giác mượt mà
+                priceDisplay.style.transition = 'opacity 0.2s';
+                priceDisplay.style.opacity = '0';
+
+                setTimeout(() => {
+                    // Định dạng tiền VNĐ (1.500.000)
+                    const formattedPrice = new Intl.NumberFormat('vi-VN').format(newPrice) + ' ₫';
+                    priceDisplay.innerText = formattedPrice;
+                    priceDisplay.style.opacity = '1';
+                }, 200);
+            }
+        });
+    }
+
+    // 3. Kiểm tra trước khi Add to Cart (Ràng buộc chọn biến thể)
+    if (addToCartBtn && variantSelect) {
+        const cartForm = addToCartBtn.closest('form');
+        
+        cartForm.addEventListener('submit', function(e) {
+            if (variantSelect.value === "") {
+                e.preventDefault(); // Chặn gửi form
+                
+                // Hiệu ứng rung nhẹ cái ô select để nhắc khách chọn
+                variantSelect.classList.add('is-invalid');
+                variantSelect.style.borderColor = '#dc3545';
+                
+                alert('Vui lòng chọn phiên bản hoặc Switch trước khi thêm vào giỏ hàng!');
+                
+                variantSelect.focus();
+            }
+        });
+
+        // Xóa viền đỏ khi khách bắt đầu chọn
+        variantSelect.addEventListener('change', function() {
+            if (this.value !== "") {
+                this.style.borderColor = '#dee2e6'; // Trả về màu mặc định
+                this.classList.remove('is-invalid');
+            }
+        });
+    }
+});
+
+// 1. Khi trang vừa tải xong
+    window.addEventListener("load", function() {
+        const scrollPos = sessionStorage.getItem("scrollPos");
+        if (scrollPos) {
+            document.documentElement.style.scrollBehavior = "auto";
+            window.scrollTo(0, scrollPos);
+            setTimeout(() => {
+                document.documentElement.style.scrollBehavior = "smooth";
+            }, 10);
+            sessionStorage.removeItem("scrollPos");
+        }
+    });
+    document.addEventListener('mousedown', function(e) {
+        const target = e.target.closest('.btn-step, .hover-danger');
+        if (target) {
+            sessionStorage.setItem("scrollPos", window.scrollY);
+        }
+    });

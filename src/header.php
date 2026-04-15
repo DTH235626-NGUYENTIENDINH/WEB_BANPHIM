@@ -4,9 +4,13 @@
 <head>
     <meta charset="utf-8">
     <title>Rabu keyboard</title>
+    <script src="https://unpkg.com/@hotwired/turbo@7.1.0/dist/turbo.es201.umd.js"></script>
     <link rel="stylesheet" href="CSS/products.css">
+    <link rel="stylesheet" href="CSS/detail_products.css">
+    <link rel="stylesheet" href="CSS/cart.css">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 
 <body>
@@ -33,12 +37,29 @@
             </div>
 
             <div class="d-flex align-items-center gap-3 gap-md-4">
+
                 <a href="#" class="text-dark nav-icon-link d-none d-sm-block"><i class="fa-regular fa-envelope"></i></a>
+
                 <a href="#" class="text-dark nav-icon-link"><i class="fa-solid fa-magnifying-glass"></i></a>
+
                 <a href="index.php?page=login" class="text-dark nav-icon-link"><i class="fa-regular fa-user"></i></a>
-                <a href="#" class="text-dark nav-icon-link position-relative">
+                
+                <!--Cart-->
+                <?php
+                $cart_count = 0;
+                if (isset($_SESSION['cart'])) {
+                    foreach ($_SESSION['cart'] as $item) {
+                        $cart_count += $item['quantity'];
+                    }
+                }
+                ?>
+                <a href="index.php?page=cart" class="text-dark nav-icon-link position-relative">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="cart-badge">0</span>
+                    <?php if ($cart_count > 0): ?>
+                        <span class="cart-badge">
+                            <?php echo $cart_count; ?>
+                        </span>
+                    <?php endif; ?>
                 </a>
             </div>
         </div>

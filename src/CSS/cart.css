@@ -1,0 +1,74 @@
+/* 1. Reset & Background */
+body { 
+    background-color: #f8f9fa; 
+}
+
+/* 2. Card sản phẩm */
+.cart-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0,0,0,0.05) !important;
+}
+.cart-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+}
+
+/* 3. Bộ tăng giảm số lượng (Gộp lại từ 2 đoạn cũ) */
+.qty-stepper {
+    height: 40px; /* Lấy giá trị sau cùng ông dùng */
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+}
+
+.btn-step {
+    width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #333;
+    transition: 0.2s;
+}
+
+.btn-step:hover:not(.bg-dark) {
+    background-color: #f0f0f0;
+}
+
+.btn-step.bg-dark:hover {
+    background-color: #000 !important;
+}
+
+/* 4. Thùng rác & Badge */
+.hover-danger:hover {
+    color: #dc3545 !important;
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 6px 15px;
+}
+
+/* 5. Nút Checkout Vàng - Đen (Quan trọng nhất) */
+.btn-checkout {
+    background-color: #ffcc00 !important; 
+    color: #000000 !important;            
+    border: none !important;
+    padding: 12px 20px !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s all ease;
+    text-decoration: none; /* Tránh bị gạch chân link */
+}
+
+.btn-checkout:hover {
+    background-color: #e6b800 !important;
+    color: #000000 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+}
