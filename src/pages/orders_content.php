@@ -27,7 +27,7 @@ $res_orders = mysqli_query($conn, $sql_orders);
                 <tbody>
                     <?php while($order = mysqli_fetch_assoc($res_orders)): ?>
                         <tr>
-                            <td class="p-3 fw-bold">#<?php echo $order['id']; ?></td>
+                            <td class="p-3 fw-bold">#<?php echo $order['ma_don']; ?></td>
                             <td class="p-3"><?php echo date('d/m/Y', strtotime($order['ngay_dat'])); ?></td>
                             <td class="p-3 fw-bold"><?php echo number_format($order['tong_tien_hang'], 0, ',', '.'); ?> ₫</td>
                             <td class="p-3">

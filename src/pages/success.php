@@ -24,7 +24,7 @@
             <a href="index.php" class="btn btn-checkout px-5 py-3 rounded-pill fw-bold shadow-sm text-decoration-none">
                 BACK TO HOME
             </a>
-            <a href="index.php?page=my_orders" class="btn btn-outline-dark px-5 py-3 rounded-pill fw-bold">
+            <a href="index.php?page=orders" class="btn btn-outline-dark px-5 py-3 rounded-pill fw-bold">
                 VIEW ORDER
             </a>
         </div>
