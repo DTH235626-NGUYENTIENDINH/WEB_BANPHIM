@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_SESSION['cart'])) {
                     tong_tien_hang, phi_ship, tong_thanh_toan, phuong_thuc_tt, trang_thai_don
                   ) VALUES (
                     '$ma_don', '$ten_nguoi_nhan', '$sdt_nguoi_nhan', '$dia_chi_giao', 
-                    '$tong_tien_hang', '$phi_ship', '$tong_thanh_toan', '$phuong_thuc_tt', 'cho_xac_nhan'
+                    '$tong_tien_hang', '$phi_ship', '$tong_thanh_toan', '$phuong_thuc_tt', 'Pending'
                   )";
 
     if (mysqli_query($conn, $sql_order)) {

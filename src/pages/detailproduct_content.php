@@ -37,28 +37,31 @@ $res_variants = mysqli_query($conn, $sql_variants);
                 <input type="hidden" name="product_id" value="<?php echo $id; ?>">
 
                 <div class="product-options mb-4">
-                    <?php
-                    if (mysqli_num_rows($res_variants) > 0):
-                        ?>
+                    <?php if (mysqli_num_rows($res_variants) > 0): ?>
                         <label class="fw-bold mb-2 text-uppercase small">Select Version / Switch:</label>
-                        <select name="variant_id" id="variant-select" class="form-select border-2 py-2" required>
-                            <option value="" data-price="<?php echo $product['gia_hien_thi']; ?>">-- Choose an option --
-                            </option>
-                            <?php while ($variant = mysqli_fetch_assoc($res_variants)): ?>
-                                <option value="<?php echo $variant['id']; ?>" data-price="<?php echo $variant['gia_ban']; ?>">
+                        <select name="variant_id" class="form-select border-2 py-2" required>
+                            <option value="">-- Choose an option --</option>
+                            <?php
+                            // Reset con trỏ dữ liệu nếu đã dùng ở đâu đó phía trên
+                            mysqli_data_seek($res_variants, 0);
+                            while ($variant = mysqli_fetch_assoc($res_variants)):
+                                ?>
+                                <option value="<?php echo $variant['id']; ?>">
                                     <?php echo $variant['ten_bien_the']; ?>
                                     (<?php echo number_format($variant['gia_ban'], 0, ',', '.'); ?> ₫)
                                 </option>
                             <?php endwhile; ?>
                         </select>
                     <?php else: ?>
-                        <p class="text-muted"><i class="bi bi-info-circle"></i> Standard Edition (One size fits all)</p>
+                        <p class="text-muted small italic">Standard Edition</p>
                         <input type="hidden" name="variant_id" value="0">
                     <?php endif; ?>
                 </div>
 
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-dark btn-lg py-3 rounded-pill">ADD TO CART</button>
+                    <button type="submit" name="add_to_cart" class="btn btn-dark btn-lg py-3 rounded-pill fw-bold">
+                        ADD TO CART
+                    </button>
                 </div>
             </form>
         </div>

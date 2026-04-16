@@ -7,15 +7,16 @@ USE keyboard_store;
 -- --------------------------------------------------------
 CREATE TABLE USERS (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
     ho_ten VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
     mat_khau VARCHAR(255) NOT NULL,
-    so_dien_thoai VARCHAR(20),
-    dia_chi TEXT,
-    vai_tro ENUM('khach','admin') DEFAULT 'khach',
+    so_dien_thoai VARCHAR(20) NULL,
+    dia_chi TEXT NULL,
+    vai_tro ENUM('khach', 'admin') DEFAULT 'khach',
     reset_token VARCHAR(255) NULL,
     ngay_tao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 -- 2. DANH MỤC & THƯƠNG HIỆU (CATEGORIES & BRANDS)
@@ -85,7 +86,7 @@ CREATE TABLE CART (
     FOREIGN KEY (user_id) REFERENCES USERS(id) ON DELETE CASCADE,
     FOREIGN KEY (variant_id) REFERENCES PRODUCT_VARIANTS(id) ON DELETE CASCADE
 );
-
+ALTER TABLE CART ADD UNIQUE KEY unique_cart_item (user_id, variant_id);
 -- --------------------------------------------------------
 -- 6. MÃ GIẢM GIÁ (COUPONS)
 -- --------------------------------------------------------
@@ -114,9 +115,10 @@ CREATE TABLE ORDERS (
     giam_gia DECIMAL(12,0) DEFAULT 0,
     tong_thanh_toan DECIMAL(12,0) NOT NULL,
     phuong_thuc_tt ENUM('tien_mat','chuyen_khoan','vnpay') DEFAULT 'tien_mat',
-    trang_thai_don ENUM('cho_xac_nhan','dang_xu_ly','dang_giao','da_giao','da_huy') DEFAULT 'cho_xac_nhan',
+    trang_thai_don ENUM('Pending','Processing','Shipping','Delivered','Cancelled') DEFAULT 'cho_xac_nhan',
     ngay_dat TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES USERS(id) ON DELETE SET NULL
+    
 );
 
 -- --------------------------------------------------------

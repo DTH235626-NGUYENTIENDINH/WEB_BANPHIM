@@ -10,11 +10,10 @@
     <link rel="stylesheet" href="CSS/cart.css">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
-    <!-- THANH MENU -->
     <nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom py-3">
         <div class="container-fluid px-md-5">
 
@@ -37,14 +36,40 @@
             </div>
 
             <div class="d-flex align-items-center gap-3 gap-md-4">
-
                 <a href="#" class="text-dark nav-icon-link d-none d-sm-block"><i class="fa-regular fa-envelope"></i></a>
-
                 <a href="#" class="text-dark nav-icon-link"><i class="fa-solid fa-magnifying-glass"></i></a>
 
-                <a href="index.php?page=login" class="text-dark nav-icon-link"><i class="fa-regular fa-user"></i></a>
-                
-                <!--Cart-->
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <div class="dropdown">
+                        <a href="#" class="text-dark nav-icon-link text-decoration-none d-flex align-items-center gap-2"
+                            data-bs-toggle="dropdown">
+                            <i class="fa-regular fa-circle-user fs-5"></i>
+                            <span class="small fw-bold d-none d-md-inline">
+                                <?php
+                                $name_parts = explode(' ', $_SESSION['user_name']);
+                                echo strtoupper($name_parts[0]);
+                                ?>
+                            </span>
+                        </a>
+                        <ul
+                            class="dropdown-menu dropdown-menu-end border-0 shadow-sm rounded-3 mt-3 animate__animated animate__fadeIn animate__faster">
+                            <li><a class="dropdown-item small py-2" href="index.php?page=profile"><i
+                                        class="fa-solid fa-address-card me-2"></i> My Profile</a></li>
+                            <li><a class="dropdown-item small py-2" href="index.php?page=orders"><i
+                                        class="fa-solid fa-box me-2"></i> Orders</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item small py-2 text-danger" href="handles/logout_action.php"><i
+                                        class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                <?php else: ?>
+                    <a href="index.php?page=login" class="text-dark nav-icon-link">
+                        <i class="fa-regular fa-user"></i>
+                    </a>
+                <?php endif; ?>
+
                 <?php
                 $cart_count = 0;
                 if (isset($_SESSION['cart'])) {

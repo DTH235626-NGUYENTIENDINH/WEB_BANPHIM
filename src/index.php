@@ -9,26 +9,44 @@ include 'header.php'; // Gọi đầu trang
     // Lấy tham số 'page' từ link (ví dụ: index.php?page=login)
     $p = isset($_GET['page']) ? $_GET['page'] : 'home';
 
-    if ($p == 'login') {
-        include 'pages/login_content.php';
-    } elseif ($p == 'register') {
-        include 'pages/register_content.php';
-    } elseif ($p == 'products') {
-        include 'pages/product_content.php';
-    } elseif ($p == 'detail') {
-        include 'pages/detailproduct_content.php';
-    } 
-    elseif ($p == 'cart') {
-        include 'pages/cart_content.php';
-    }
-    elseif ($p == 'checkout') {
-        include 'pages/checkout_content.php';
-    }
-    elseif ($p == 'success') {
-        include 'pages/success.php';
-    }
-    else {
-        include 'pages/home_content.php';
+    switch ($p) {
+        case 'login':
+            include 'pages/login_content.php';
+            break;
+
+        case 'register':
+            include 'pages/register_content.php';
+            break;
+
+        case 'products':
+            include 'pages/product_content.php';
+            break;
+
+        case 'detail':
+            include 'pages/detailproduct_content.php';
+            break;
+
+        case 'cart':
+            include 'pages/cart_content.php';
+            break;
+
+        case 'checkout':
+            include 'pages/checkout_content.php';
+            break;
+
+        case 'success':
+            include 'pages/success.php';
+            break;
+        case 'profile':
+            include 'pages/profile_content.php';
+            break;
+        case 'orders':
+            include 'pages/orders_content.php';
+            break;
+        case 'home':
+        default:
+            include 'pages/home_content.php';
+            break;
     }
     ?>
 </main>
