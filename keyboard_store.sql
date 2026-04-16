@@ -87,6 +87,7 @@ CREATE TABLE CART (
     FOREIGN KEY (variant_id) REFERENCES PRODUCT_VARIANTS(id) ON DELETE CASCADE
 );
 ALTER TABLE CART ADD UNIQUE KEY unique_cart_item (user_id, variant_id);
+ALTER TABLE CART MODIFY variant_id INT NULL;
 -- --------------------------------------------------------
 -- 6. MÃ GIẢM GIÁ (COUPONS)
 -- --------------------------------------------------------
