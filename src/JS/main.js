@@ -22,7 +22,27 @@ function selectSort(element) {
     element.classList.add('active-sort');
 }
 
+function toggleBrands() {
+    const container = document.getElementById('brandContainer');
+    const chevron = document.getElementById('brandChevron');
+    
+    container.classList.toggle('active');
+    
+    // Xoay mũi tên 90 độ khi mở
+    if (container.classList.contains('active')) {
+        chevron.style.transform = 'rotate(90deg)';
+    } else {
+        chevron.style.transform = 'rotate(0deg)';
+    }
+}
 
+// Tự động mở nếu đang lọc hãng sẵn
+window.addEventListener('load', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('brand') && urlParams.get('brand') !== 'all') {
+        toggleBrands();
+    }
+});
 /**
  * XỬ LÝ TRANG CHI TIẾT SẢN PHẨM
  */
@@ -102,3 +122,5 @@ document.addEventListener('DOMContentLoaded', function() {
             sessionStorage.setItem("scrollPos", window.scrollY);
         }
     });
+
+

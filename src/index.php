@@ -46,6 +46,9 @@ include 'header.php'; // Gọi đầu trang
         case 'order_detail':
             include 'pages/order_detail_content.php';
             break;
+        case 'order_status':
+            include 'pages/order_status.php';
+            break;
         case 'home':
         default:
             include 'pages/home_content.php';

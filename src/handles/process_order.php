@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../DB/db_connect.php';
-
+require_once 'sending_order_to_email.php';
 // 1. Kiểm tra đăng nhập
 if (!isset($_SESSION['user_id'])) {
     die("Error: User session not found. Please login again.");
@@ -58,6 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_SESSION['cart'])) {
         // --- BƯỚC 3: DỌN DẸP ---
         mysqli_query($conn, "DELETE FROM CART WHERE user_id = '$user_id'");
         unset($_SESSION['cart']);
+
+        // --- BƯỚC 4: GỬI EMAIL XÁC NHẬN (MỚI THÊM) ---
+        sendConfirmationEmail($email, $ten_nguoi_nhan, $ma_don, $tong_thanh_toan);
 
         header("Location: ../index.php?page=success&id=" . $order_id);
         exit();

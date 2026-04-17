@@ -6,7 +6,8 @@ $res_footer_cat = mysqli_query($conn, $sql_footer_cat);
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="JS/main.js"></script>
 <footer class="py-5 bg-dark text-white">
     <div class="container">
         <div class="row pt-4">

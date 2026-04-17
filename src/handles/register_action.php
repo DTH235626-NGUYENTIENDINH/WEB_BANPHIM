@@ -37,6 +37,7 @@ if (isset($_POST['register'])) {
 
     if (mysqli_query($conn, $sql)) {
         // Đăng ký thành công -> Chuyển hướng sang trang Login với thông báo thành công
+        sendWelcomeEmail($email, $ho_ten);
         header("Location: ../index.php?page=login&success=registered");
         exit();
     } else {

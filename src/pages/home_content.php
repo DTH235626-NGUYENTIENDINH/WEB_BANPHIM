@@ -76,29 +76,96 @@
         </div>
 
         <div class="row g-4">
-            <div class="col-6 col-md-4 col-lg-4">
-                <div class="product-card">
-                    <div class="product-img-wrapper">
-                        <img src="../public/carousel/pic2.webp" class="img-fluid" style="max-height: 160px;">
-                    </div>
+            <?php
+            // Thêm LIMIT 3 để chỉ lấy đúng 3 sản phẩm bàn phím
+            $sql = "SELECT p.*, b.ten as brand_name 
+            FROM PRODUCTS p
+            LEFT JOIN BRANDS b ON p.brand_id = b.id
+            WHERE p.loai_san_pham = 'keyboards' 
+            AND p.deleted_at IS NULL
+            ORDER BY p.ngay_tao DESC 
+            LIMIT 3";
 
-                    <div class="product-content">
-                        <p class="text-secondary small mb-1 text-uppercase fw-medium">Brand Name</p>
-                        <h5 class="fw-bold">Product Name Here (Even if it's very long)</h5>
-                        <p class="text-muted small mb-3">Short description about the product.</p>
+            $result = mysqli_query($conn, $sql);
 
-                        <div class="mt-auto-custom">
-                            <span class="fw-bold fs-5 d-block mb-3">1.000.000 ₫</span>
-                            <a href="#" class="btn-learn-more">
-                                <div class="icon-box">
-                                    <i class="fa-solid fa-arrow-right"></i>
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $id = $row['id'];
+                    $name = $row['ten'];
+                    $brand = isset($row['brand_name']) ? $row['brand_name'] : 'Generic';
+                    $price = $row['gia_hien_thi'];
+                    $image = $row['anh_dai_dien'];
+                    $desc = strip_tags($row['mo_ta']);
+                    ?>
+                    <div class="row g-4">
+                        <?php
+                        // Truy vấn chuẩn theo file SQL của ông: Lấy SP là 'keyboards' và chưa bị xóa
+                        $sql = "SELECT p.*, b.ten as brand_name 
+            FROM PRODUCTS p
+            LEFT JOIN BRANDS b ON p.brand_id = b.id
+            WHERE p.loai_san_pham = 'keyboards' 
+            AND p.deleted_at IS NULL
+            ORDER BY p.ngay_tao DESC 
+            LIMIT 3"; // Lấy 3 cái mới nhất
+                
+                        $result = mysqli_query($conn, $sql);
+
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $id = $row['id'];
+                                $name = $row['ten'];
+                                $brand = isset($row['brand_name']) ? $row['brand_name'] : 'Brand Name';
+                                $price = $row['gia_hien_thi'];
+                                $image = $row['anh_dai_dien'];
+                                $desc = strip_tags($row['mo_ta']); // Lấy mô tả nếu cần dùng
+                                ?>
+                                <div class="col-6 col-md-4 col-lg-4">
+                                    <div class="product-card">
+                                        <div class="product-img-wrapper">
+                                            <img src="../public/products/<?php echo $image ? $image : 'default.png'; ?>"
+                                                class="img-fluid" style="max-height: 160px;">
+                                        </div>
+
+                                        <div class="product-content">
+                                            <p class="text-secondary small mb-1 text-uppercase fw-medium">
+                                                <?php echo htmlspecialchars($brand); ?>
+                                            </p>
+                                            <h5 class="fw-bold">
+                                                <?php echo htmlspecialchars($name); ?>
+                                            </h5>
+                                            <p class="text-muted small mb-3">
+                                                <?php echo (mb_strlen($desc) > 50) ? mb_substr($desc, 0, 50) . '...' : $desc; ?>
+                                            </p>
+
+                                            <div class="mt-auto-custom">
+                                                <span class="fw-bold fs-5 d-block mb-3">
+                                                    <?php echo number_format($price, 0, ',', '.'); ?> ₫
+                                                </span>
+
+                                                <a href="index.php?page=detail&id=<?php echo $id; ?>" class="btn-learn-more"
+                                                    onclick="showProductLoading(event, '<?php echo addslashes($name); ?>')">
+                                                    <div class="icon-box">
+                                                        <i class="fa-solid fa-arrow-right"></i>
+                                                    </div>
+                                                    <span>Learn more</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span>Learn more</span>
-                            </a>
-                        </div>
+                                <?php
+                            }
+                        } else {
+                            echo '<div class="col-12 text-center py-5">No products found.</div>';
+                        }
+                        ?>
                     </div>
-                </div>
-            </div>
+                    <?php
+                }
+            } else {
+                echo '<div class="col-12 text-center py-5">No products found.</div>';
+            }
+            ?>
         </div>
     </div>
 </section>
@@ -118,29 +185,67 @@
         </div>
 
         <div class="row g-4">
-            <div class="col-6 col-md-4 col-lg-4">
-                <div class="product-card">
-                    <div class="product-img-wrapper">
-                        <img src="../public/carousel/pic2.webp" class="img-fluid" style="max-height: 160px;">
-                    </div>
+            <?php
+            // 1. SQL Query: Filter products where loai_san_pham is NOT 'keyboards'
+            $sql = "SELECT p.*, b.ten as brand_name 
+            FROM PRODUCTS p
+            LEFT JOIN BRANDS b ON p.brand_id = b.id
+            WHERE p.loai_san_pham != 'keyboards' 
+            AND p.deleted_at IS NULL
+            ORDER BY p.ngay_tao DESC 
+            LIMIT 3"; // Fetch the 3 latest non-keyboard items
+            
+            $result = mysqli_query($conn, $sql);
 
-                    <div class="product-content">
-                        <p class="text-secondary small mb-1 text-uppercase fw-medium">Brand Name</p>
-                        <h5 class="fw-bold">Product Name Here (Even if it's very long)</h5>
-                        <p class="text-muted small mb-3">Short description about the product.</p>
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $id = $row['id'];
+                    $name = $row['ten'];
+                    $brand = isset($row['brand_name']) ? $row['brand_name'] : 'Brand Name';
+                    $price = $row['gia_hien_thi'];
+                    $image = $row['anh_dai_dien'];
+                    $desc = strip_tags($row['mo_ta']);
+                    ?>
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="product-card">
+                            <div class="product-img-wrapper">
+                                <img src="../public/products/<?php echo $image ? $image : 'default.png'; ?>" class="img-fluid"
+                                    style="max-height: 160px;" alt="<?php echo htmlspecialchars($name); ?>">
+                            </div>
 
-                        <div class="mt-auto-custom">
-                            <span class="fw-bold fs-5 d-block mb-3">1.000.000 ₫</span>
-                            <a href="#" class="btn-learn-more">
-                                <div class="icon-box">
-                                    <i class="fa-solid fa-arrow-right"></i>
+                            <div class="product-content">
+                                <p class="text-secondary small mb-1 text-uppercase fw-medium">
+                                    <?php echo htmlspecialchars($brand); ?>
+                                </p>
+                                <h5 class="fw-bold">
+                                    <?php echo htmlspecialchars($name); ?>
+                                </h5>
+                                <p class="text-muted small mb-3">
+                                    <?php echo (strlen($desc) > 50) ? substr($desc, 0, 50) . '...' : $desc; ?>
+                                </p>
+
+                                <div class="mt-auto-custom">
+                                    <span class="fw-bold fs-5 d-block mb-3">
+                                        <?php echo number_format($price, 0, ',', '.'); ?> ₫
+                                    </span>
+
+                                    <a href="index.php?page=detail&id=<?php echo $id; ?>" class="btn-learn-more"
+                                        onclick="showProductLoading(event, '<?php echo addslashes($name); ?>')">
+                                        <div class="icon-box">
+                                            <i class="fa-solid fa-arrow-right"></i>
+                                        </div>
+                                        <span>Learn more</span>
+                                    </a>
                                 </div>
-                                <span>Learn more</span>
-                            </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <?php
+                }
+            } else {
+                echo '<div class="col-12 text-center py-5 text-muted">No accessories found.</div>';
+            }
+            ?>
         </div>
     </div>
 </section>
