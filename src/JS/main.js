@@ -124,3 +124,38 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
+
+function updateProductUI() {
+    const select = document.getElementById('variantSelect');
+    const selectedOption = select.options[select.selectedIndex];
+    
+    // 1. Lấy dữ liệu từ option
+    const price = selectedOption.getAttribute('data-price');
+    const stock = parseInt(selectedOption.getAttribute('data-stock'));
+    
+    // 2. Cập nhật giá hiển thị (Giá thật)
+    if (price) {
+        document.getElementById('main-price').innerText = price;
+    }
+    
+    // 3. Cập nhật trạng thái nút và thông báo kho
+    const btn = document.getElementById('addToCartBtn');
+    const statusDiv = document.getElementById('stock-status');
+
+    if (stock === -1) {
+        statusDiv.innerHTML = "";
+        btn.disabled = false;
+        btn.innerText = "ADD TO CART";
+        return;
+    }
+
+    if (stock <= 0) {
+        statusDiv.innerHTML = '<span class="text-danger">Out of Stock - Please choose another version</span>';
+        btn.disabled = true;
+        btn.innerText = "OUT OF STOCK";
+    } else {
+        statusDiv.innerHTML = '<span class="text-success small">Available in stock: ' + stock + ' items</span>';
+        btn.disabled = false;
+        btn.innerText = "ADD TO CART";
+    }
+}

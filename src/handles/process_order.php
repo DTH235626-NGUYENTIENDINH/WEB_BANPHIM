@@ -43,15 +43,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_SESSION['cart'])) {
             $v_id = isset($item['variant_id']) ? $item['variant_id'] : 0;
             $qty = $item['quantity'];
             $price = $item['price'];
+            $p_id = $item['id']; // ID sản phẩm chính
 
-            // QUAN TRỌNG: Nếu là 0 thì gửi chữ NULL, nếu có ID thì bao bọc trong nháy đơn
+            // 2.1. Lưu vào bảng ORDER_ITEMS
             $v_id_sql = ($v_id == 0 || $v_id == "") ? "NULL" : "'$v_id'";
-
             $sql_detail = "INSERT INTO ORDER_ITEMS (order_id, variant_id, so_luong, don_gia) 
-                   VALUES ('$order_id', $v_id_sql, '$qty', '$price')";
+               VALUES ('$order_id', $v_id_sql, '$qty', '$price')";
 
-            if (!mysqli_query($conn, $sql_detail)) {
-                die("Lỗi chèn sản phẩm: " . mysqli_error($conn) . " | SQL: " . $sql_detail);
+            if (mysqli_query($conn, $sql_detail)) {
+
+                // 2.2. TRỪ SỐ LƯỢNG TỒN KHO (Chỉ trừ nếu là biến thể hợp lệ)
+                if ($v_id != 0 && $v_id != "") {
+                    $sql_update_stock = "UPDATE PRODUCT_VARIANTS 
+                                         SET so_luong_ton = so_luong_ton - $qty 
+                                         WHERE id = '$v_id' AND so_luong_ton >= $qty";
+
+                    if (!mysqli_query($conn, $sql_update_stock)) {
+                        // Ghi log lỗi trừ kho nhưng có thể cho qua để không làm hỏng trải nghiệm khách
+                        error_log("Lỗi trừ kho cho variant_id $v_id: " . mysqli_error($conn));
+                    }
+                }
+            } else {
+                die("Lỗi chèn sản phẩm: " . mysqli_error($conn));
             }
         }
 

@@ -37,7 +37,18 @@
 
             <div class="d-flex align-items-center gap-3 gap-md-4">
                 <a href="#" class="text-dark nav-icon-link d-none d-sm-block"><i class="fa-regular fa-envelope"></i></a>
-                <a href="#" class="text-dark nav-icon-link"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <div class="dropdown">
+                    <a href="#" class="text-dark nav-icon-link" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end p-3 border-0 shadow-sm rounded-3 mt-3 animate__animated animate__fadeIn animate__faster" style="width: 300px;">
+                        <form action="index.php" method="GET" class="d-flex m-0">
+                            <input type="hidden" name="page" value="products">
+                            <input type="text" name="q" class="form-control rounded-pill me-2 shadow-none focus-ring focus-ring-dark border" placeholder="Search products..." required>
+                            <button type="submit" class="btn btn-dark rounded-circle px-3"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
+                </div>
 
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <div class="dropdown">
@@ -57,6 +68,13 @@
                                         class="fa-solid fa-address-card me-2"></i> My Profile</a></li>
                             <li><a class="dropdown-item small py-2" href="index.php?page=orders"><i
                                         class="fa-solid fa-box me-2"></i> Orders</a></li>
+                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item small py-2 fw-bold" href="../admin/index.php"><i
+                                        class="fa-solid fa-gauge-high me-2"></i> Admin Panel</a></li>
+                            <?php endif; ?>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

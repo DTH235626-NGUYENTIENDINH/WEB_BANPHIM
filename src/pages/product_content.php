@@ -182,8 +182,9 @@ if (!$result) {
                         <div class="card border-0 h-100 product-card">
                             <a href="index.php?page=detail&id=<?php echo $row['id']; ?>" class="text-decoration-none text-dark">
                                 <div class="bg-light rounded-4 p-4 mb-3 position-relative product-img-holder">
-                                    <img src="img/<?php echo $row['anh_dai_dien']; ?>" class="img-fluid"
-                                        alt="<?php echo $row['ten']; ?>">
+                                    <img src="../public/products/<?php echo $row['anh_dai_dien']; ?>" class="img-fluid d-block mx-auto"
+                                        alt="<?php echo $row['ten']; ?>"
+                                        style="width: 200px; height: 200px; object-fit: contain; mix-blend-mode: darken;">
                                 </div>
                                 <div class="px-2">
                                     <h6 class="fw-bold mb-1"><?php echo $row['ten']; ?></h6>

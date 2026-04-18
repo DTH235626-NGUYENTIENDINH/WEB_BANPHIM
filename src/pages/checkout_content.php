@@ -86,7 +86,7 @@ if (isset($_SESSION['cart'])) {
                     <li class="list-group-item d-flex justify-content-between lh-sm bg-transparent border-0 px-0 py-3">
                         <div class="d-flex align-items-center">
                             <div class="bg-white p-1 rounded border me-3" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
-                                <img src="img/<?php echo $item['image']; ?>" class="img-fluid" style="max-height: 100%;">
+                                <img src="../public/products/<?php echo $item['image']; ?>" class="img-fluid" style="max-height: 100%; width: 50px; height: 50px; object-fit: contain;">
                             </div>
                             <div>
                                 <h6 class="my-0 fw-bold"><?php echo $item['name']; ?></h6>

@@ -22,7 +22,8 @@ $sql_items = "SELECT
                 oi.don_gia, 
                 p.ten, 
                 p.anh_dai_dien, 
-                v.ten_bien_the 
+                v.ten_bien_the,
+                COALESCE(v.hinh_anh_bien_the, p.anh_dai_dien) AS hinh_anh_hien_thi 
               FROM ORDER_ITEMS oi
               LEFT JOIN PRODUCT_VARIANTS v ON oi.variant_id = v.id
               LEFT JOIN PRODUCTS p ON v.product_id = p.id
@@ -81,8 +82,8 @@ $res_items = mysqli_query($conn, $sql_items);
                                 <tr>
                                     <td class="border-0 px-0 py-3">
                                         <div class="d-flex align-items-center">
-                                            <img src="img/<?php echo $item['anh_dai_dien']; ?>" class="rounded border"
-                                                style="width: 50px; height: 50px; object-fit: cover;">
+                                            <img src="../public/products/<?php echo $item['hinh_anh_hien_thi']; ?>" class="rounded border"
+                                                style="width: 50px; height: 50px; object-fit: contain;">
                                             <div class="ms-3">
                                                 <p class="mb-0 fw-bold small"><?php echo $item['ten']; ?></p>
                                                 <small class="text-muted">

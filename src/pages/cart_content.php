@@ -32,8 +32,9 @@
                     <div class="cart-card mb-3 p-4 bg-white rounded-4 shadow-sm border">
                         <div class="row align-items-center">
                             <div class="col-md-3">
-                                <div class="img-container rounded-3 p-3 mb-2" style="background-color: #f0f2f5;">
-                                    <img src="img/<?php echo $item['image']; ?>" class="img-fluid">
+                                <div class="img-container rounded-3 mb-2 d-flex align-items-center justify-content-center" style="background-color: #f0f2f5; width: 100px; height: 100px; margin: 0 auto;">
+                                    <img src="../public/products/<?php echo $item['image']; ?>" class="img-fluid"
+                                        style="max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: darken;">
                                 </div>
                             </div>
 
@@ -43,7 +44,7 @@
                                 <div class="product-selection mt-2">
                                     <?php if (!empty($item['variant_name'])): ?>
                                         <p class="mb-0 text-muted" style="font-size: 0.9rem;">
-                                            <span class="opacity-75">Select Version / Switch:</span>
+                                            <span class="opacity-75">Select Version: </span>
                                             <span class="text-dark fw-bold ms-1"><?php echo $item['variant_name']; ?></span>
                                         </p>
                                     <?php else: ?>
@@ -105,7 +106,7 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="card border-0 shadow-sm p-4 bg-white rounded-4 sticky-top" style="top: 20px;">
+                <div class="card border-0 shadow-sm p-4 bg-white rounded-4 sticky-top" style="top: 100px; z-index: 1010;">
                     <h5 class="fw-bold mb-4 text-uppercase">Order Summary</h5>
                     <div class="d-flex justify-content-between mb-2">
                         <span class="text-muted">Subtotal</span>
